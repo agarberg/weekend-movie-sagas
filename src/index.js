@@ -15,15 +15,16 @@ import { HashRouter as Router, Route, Link } from "react-router-dom";
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
-    yield takeEvery('FETCH_GENRES', fetchGenres)
+    yield takeEvery('GET_GENRES', genres)
+    yield takeEvery('SET_MOVIE', fetchGenres)
 }
 
 function* fetchGenres(){
     try {
-        const genres = yield axios.get('/api/movie');
-        console.log('get all:', genres.data);
-        yield put({ type: 'SET_MOVIES', payload: movies.data });
-
+        // const id = movie.id
+        const genres = yield axios.get(`/api/genre/${id}`);
+        console.log('get genres:', genres.data);
+        yield put({ type: 'SET_GENRES', payload: genres.data });
     } catch {
         console.log('Genre GETTING error');
     }
@@ -55,7 +56,15 @@ const movies = (state = [], action) => {
             return state;
     }
 }
-
+//used to store the selected movie into 
+const selectedMovie = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_MOVIE':
+            return action.payload;
+        default:
+            return state;
+}
+}
 // Used to store the movie genres
 const genres = (state = [], action) => {
     switch (action.type) {
@@ -71,6 +80,7 @@ const storeInstance = createStore(
     combineReducers({
         movies,
         genres,
+        selectedMovie,
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
@@ -86,4 +96,4 @@ ReactDOM.render(
         </Provider>
     </React.StrictMode>,
     document.getElementById('root')
-);
+)

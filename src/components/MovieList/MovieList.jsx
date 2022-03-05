@@ -12,10 +12,10 @@ function MovieList() {
         dispatch({ type: 'FETCH_MOVIES' });
     }, []);
 
-    function  getDetails(movie){
+    function  getGenres(movie){
         console.log("clicked", movie.id)
         dispatch({
-            type: "GET DETAILS",
+            type: 'SET_MOVIE',
             payload: {
                 movie
             }
@@ -32,7 +32,7 @@ function MovieList() {
                     return (
                         <div key={movie.id} >
                             <h3>{movie.title}</h3>
-                            <img onClick={() => getDetails(movie)} src={movie.poster} alt={movie.title}/>
+                            <img onClick={() => getGenres(movie)} src={movie.poster} alt={movie.title}/>
                         </div>
                     );
                 })}

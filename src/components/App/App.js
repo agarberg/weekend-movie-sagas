@@ -14,8 +14,6 @@ function App() {
         <Route path="/Details">
         <Details />
         </Route>
-       
-
         {/* Add Movie page */}
       </Router>
     </div>
