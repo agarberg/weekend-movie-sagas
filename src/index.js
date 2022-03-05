@@ -10,10 +10,24 @@ import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import { takeEvery, put } from 'redux-saga/effects';
 import axios from 'axios';
+import { HashRouter as Router, Route, Link } from "react-router-dom";
 
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
+    yield takeEvery('FETCH_GENRES', fetchGenres)
+}
+
+function* fetchGenres(){
+    try {
+        const genres = yield axios.get('/api/movie');
+        console.log('get all:', genres.data);
+        yield put({ type: 'SET_MOVIES', payload: movies.data });
+
+    } catch {
+        console.log('Genre GETTING error');
+    }
+    
 }
 
 function* fetchAllMovies() {
