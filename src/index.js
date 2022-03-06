@@ -26,7 +26,8 @@ function* fetchGenres(movie){
         console.log('get genres:', genres.data);
         //we got the data, dispatch to genres reducer 
         yield put({ type: 'SET_GENRES', payload: genres.data });
-    } catch {
+    } 
+    catch {
         console.log('Genre GETTING error');
     }
 }
@@ -39,7 +40,8 @@ function* fetchAllMovies() {
         //dispatch to movies reducer
         yield put({ type: 'SET_MOVIES', payload: movies.data });
 
-    } catch {
+    } 
+    catch {
         console.log('get all error');
     }
         
@@ -64,7 +66,7 @@ const selectedMovie = (state = [], action) => {
             return action.payload;
         default:
             return state;
-}
+    }
 }
 // Used to store the movie genres
 const genres = (state = [], action) => {
@@ -83,7 +85,7 @@ const storeInstance = createStore(
         genres,
         selectedMovie,
     }),
-    // Add sagaMiddleware to our store
+    // Add sagaMiddleware and logger to our store
     applyMiddleware(sagaMiddleware, logger),
 );
 
