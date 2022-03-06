@@ -1,15 +1,18 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-
+import {useHistory} from 'react-router-dom'
 
 
 function Details() {
+    const history = useHistory()
     const dispatch = useDispatch();
     const selectedMovie = useSelector((store) => store.selectedMovie);
     const genres = useSelector((store) => store.genres);
     console.log(genres)
     console.log(selectedMovie)
-  
+    function handleClick (){
+        history.push('/')
+    }
   return(
       <>
       <h1>Movie Details</h1>
@@ -26,6 +29,7 @@ function Details() {
                 </div>
             )
         })}
+        <button onClick={handleClick}>go back!</button>
   </>
   )
   
