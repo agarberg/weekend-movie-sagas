@@ -10,20 +10,21 @@ import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import { takeEvery, put } from 'redux-saga/effects';
 import axios from 'axios';
-import { HashRouter as Router, Route, Link } from "react-router-dom";
 
 // Create the rootSaga generator function
+//always listening for dispatches
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
     yield takeEvery('GET_GENRES', genres)
     yield takeEvery('SET_MOVIE', fetchGenres)
 }
-
+//pass through movie id to SQL and get genre list
 function* fetchGenres(movie){
     try {
         console.log(movie.payload.movie.id)
         const genres = yield axios.get(`/api/genre/${movie.payload.movie.id}`);
         console.log('get genres:', genres.data);
+        //we got the data, dispatch to genres reducer 
         yield put({ type: 'SET_GENRES', payload: genres.data });
     } catch {
         console.log('Genre GETTING error');
@@ -31,10 +32,11 @@ function* fetchGenres(movie){
 }
 
 function* fetchAllMovies() {
-    // get all movies from the DB
+    // get all movies from the DB, runs on page load
     try {
         const movies = yield axios.get('/api/movie');
         console.log('get all:', movies.data);
+        //dispatch to movies reducer
         yield put({ type: 'SET_MOVIES', payload: movies.data });
 
     } catch {
@@ -55,7 +57,7 @@ const movies = (state = [], action) => {
             return state;
     }
 }
-//used to store the selected movie into 
+//used to store the selected movie 
 const selectedMovie = (state = [], action) => {
     switch (action.type) {
         case 'SET_MOVIE':

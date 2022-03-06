@@ -6,12 +6,14 @@ import {useHistory} from 'react-router-dom'
 function MovieList() {
     const history = useHistory()
     const dispatch = useDispatch();
+    //pull movies array from the store in index.jsx
     const movies = useSelector(store => store.movies);
 
+    //on page load, dispatch fetch movies
     useEffect(() => {
-        dispatch({ type: 'FETCH_MOVIES' });
+        dispatch({type: 'FETCH_MOVIES'});
     }, []);
-
+//send dispatch stating id and set movie
     function  getMovie(movie){
         console.log("clicked", movie.id)
         dispatch({
@@ -22,7 +24,6 @@ function MovieList() {
         })
         history.push('/Details')
     }
-
 
     return (
         <main>
