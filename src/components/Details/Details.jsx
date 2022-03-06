@@ -13,13 +13,15 @@ function Details() {
   return(
       <>
       <h1>Movie Details</h1>
+        <div key={selectedMovie.movie.id}> 
         <img src={selectedMovie.movie.poster}/>
         <h2>{selectedMovie.movie.title}</h2>
         <h4>{selectedMovie.movie.description}</h4>
-        <h4>Genres:</h4>
-        {genres.map(genres => {
+        </div>
+        <h2>Genres:</h2>
+        {genres.map((genres, id) => {
             return(
-                <div key={genres.id}>
+                <div key={id}>
                 <h4>{genres.name}</h4>
                 </div>
             )
