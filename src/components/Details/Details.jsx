@@ -28,9 +28,9 @@ function Details() {
                 </div>
             )
         })}
-        </div>
         {/* //button for GO BACK */}
         <button onClick={handleClick}>back to list...</button>
+        </div>
   </>
   )
   }
