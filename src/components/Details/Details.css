@@ -1,5 +1,7 @@
+
+
 .tile {
-    align-items: flex-start;   
+    border: 5px solid black;
 }
 
 h2, h4, h1 {color: white}
