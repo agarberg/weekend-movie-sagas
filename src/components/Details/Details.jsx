@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import {useHistory} from 'react-router-dom'
+import './Details.css'
 
 function Details() {
     const history = useHistory()
@@ -12,6 +13,7 @@ function Details() {
   return(
       <>
       <h1>Movie Details</h1>
+      <div className="tile">
       {/* display photo, title and description */}
         <div key={selectedMovie.movie.id}> 
         <img src={selectedMovie.movie.poster}/>
@@ -26,6 +28,7 @@ function Details() {
                 </div>
             )
         })}
+        </div>
         {/* //button for GO BACK */}
         <button onClick={handleClick}>back to list...</button>
   </>

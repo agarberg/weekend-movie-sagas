@@ -1,4 +1,9 @@
 .movies {
     display : flex;
     flex-wrap: wrap;
+    justify-content: space-between;
 }
+body {
+    background-color: rgb(53, 53, 53);
+}
+h3 {color: white}

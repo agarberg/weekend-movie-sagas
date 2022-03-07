@@ -29,6 +29,7 @@ function MovieList() {
         <main>
             <h1>MovieList</h1>
             <section className="movies">
+               
                 {movies.map(movie => {
                     return (
                         <div key={movie.id} >
